@@ -1,29 +1,21 @@
-# Comparing iteration over an abstract container Real[] (which can hold Float32, Float64, etc. This is implemented as an array of pointer, versus a concrete container Float64[], which is implemented as a raw array.
+# Containers of abstract types are slower
+# Real[] can contain Float32, Float64, or other types of rational numbers
+# The variable a is thus implemented as an array of pointers.
+# b is a raw array of Float64. Iteration & access is much faster.
+# (This is similar to virtual functions being slower in C++)
 
 a = Real[]
 b = Float64[]
 
+# Fill a and b with the same values
 for i in 1:1000
     x = rand(Float64)
     push!(a, x)
     push!(b, x)
 end
 
-function sum_arg(x)
-    s = 0.0
-    for i in x
-        s += i
-    end
-    return s
-end;
+@timed sum(b) # running once so compilation of sum() does not distort relative times
+@timed sum(a) # running once so compilation of sum() does not distort relative times
 
-@timed sum_arg(a) # running once so compilation doesnt distort relative times
-@timed sum_arg(b) # running once so compilation doesnt distort relative times
-
-print("a: ")
-@time sum_arg(a)
-print("\nb: ")
-@time sum_arg(b)
-
-println("\nBecause b is not an abstract type, it is not implemented as an array of pointers and runs much faster!")
-
+print("a: "); @time sum(a)
+print("\nb: "); @time sum(b)

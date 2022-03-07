@@ -1,10 +1,14 @@
 # Sorting arrays has at least two potential benefits:
 
-# 1. When summing small floating point numbers, less roundoff is accumulated because the spacing between numbers that can be represented by floats on a machine is small for small numbers. i.e. for 0.00001 it is possible to add 0.00001 and get 0.00002. But for 1e100, adding 0.00001 may return 1e100. (This is may be an exaggeration, but the point is about the spacing between machine-representable numbers).
+# 1. To avoid accumulation of roundoff error it is best to take the summation of a set by adding smallest to largest.
+#    This is because the possible numbers representable by a machine using floating pointgrows apart exponentially.
+#    The spacing between all adjacent integers is 1.
 
-#Note: It might save time to use Kahan Summation and avoid sorting.
+#Note: It might save time to avoid sorting by using Kahan summation.
 
-# 2. Branch prediction in a processor may be countereffective depending on what you are doing and sorting arrays can mitigate this.
+# 2. Branch prediction can be counterproductive on an unsorted array.
+#    When using a loop to iterate an array, a branch check in the loop will assume to be true if the condition was true
+#    many times prior. Sorting assures such a prediciton is correct and the processor doesn't not have to walk back.
 
 
 # =================
@@ -25,9 +29,7 @@ function sum_h_l()
     return s
 end
 
-print("Summation low to high vs high to low: ")
-print(sum_l_h(), " ")
-println(sum_h_l(), "sums are not equal")
+println("Summation low to high vs high to low: ", sum_l_h(), " vs ", sum_h_l(), ". Sums should be equal")
 
 
 # =================
@@ -47,10 +49,9 @@ end
 
 @timed sumabove_if(r)
 
-print("Unsorted: ")
+print("\nTime to run sumabove on unsorted input: ")
 @time sumabove_if(r)
 
 r = sort(r)
-print("Sorted: ")
+print("Time to run sumabove on sorted input: ")
 @time sumabove_if(r)
-
