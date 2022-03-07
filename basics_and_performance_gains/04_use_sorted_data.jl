@@ -29,7 +29,7 @@ function sum_h_l()
     return s
 end
 
-println("Summation low to high vs high to low: ", sum_l_h(), " vs ", sum_h_l(), ". Sums should be equal")
+println("Summation low to high vs high to low: ", sum_l_h(), " vs ", sum_h_l(), ". Sums should be equal.")
 
 
 # =================

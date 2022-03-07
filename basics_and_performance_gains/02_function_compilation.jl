@@ -1,8 +1,8 @@
 # Measuring time for functions to compile
-# Because of multiple dispatch, compilation happens for each invocation using new arg types.
+# Because of multiple dispatch, compilation happens once for each invocation using new arg types.
 
-const  x = rand(Float32, 1000)
-global y = rand(1000) # global is usually used in a nested scope to refer to a var outside
+const  x = rand(Float32, 100000)
+global y = rand(100000) # global is usually used in a nested scope to refer to a var outside
 
 println("type of x is constant. value may change but type does not. typeof(x): ", typeof(x))
 println("y is not const. value and type of y can change. typeof(y): ", typeof(y))
@@ -23,10 +23,12 @@ println("\nsumming values in y...")
 
 println("\nsumming values in y...")
 @time sum_arg(y) # Second call is faster since the function has been compiled. Insignificant compile time in this case
+println("Second invocation is faster since the function has been compiled.")
 
-println("\nsumming values in y...")
+println("\nsumming values in x...")
 @time sum_arg(x) # x is a different data type BUT because the type is fixed this was compiled ahead of runtime
 
-println("\nMaking y a Vector{Int64} and summing values in y again...")
-y = rand(Int64, 1000)
+println("\nAssigning to y a new type, Vector{Int64}, and summing values...")
+y = rand(Int64, 100000)
 @time sum_arg(y)
+println("Slow again for time to compile/multiple-dispatch.")

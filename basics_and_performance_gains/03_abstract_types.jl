@@ -8,14 +8,14 @@ a = Real[]
 b = Float64[]
 
 # Fill a and b with the same values
-for i in 1:1000
+for i in 1:100000
     x = rand(Float64)
     push!(a, x)
     push!(b, x)
 end
 
-@timed sum(b) # running once so compilation of sum() does not distort relative times
 @timed sum(a) # running once so compilation of sum() does not distort relative times
+@timed sum(b) # running once so compilation of sum() does not distort relative times
 
 print("a: "); @time sum(a)
-print("\nb: "); @time sum(b)
+print("b: "); @time sum(b)
