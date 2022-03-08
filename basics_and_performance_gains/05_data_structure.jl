@@ -1,7 +1,7 @@
-# The data of a three dimensional is addressed in hardware using one dimension.
+# The data of a three dimensional vector is addressed in hardware using one dimension.
 # For a 500^3 element cube, the elements in the first row and first column of each page are 250000 addresses apart.
-# Hardware is divided into segments and there is a greater time penalty for accessing addresses on different segment than elements on the same segment.
-# Each axis of the below data cube has the same depth, but the time to sum all of the elements along an axis varies due to the hardware implementation.
+# Hardware is divided into segments and there is a greater time penalty for accessing addresses on different segments than elements on the same segment.
+# Each axis of the below data cube has the same depth, but the time to sum all of the elements along an axis varies due to this underlying hardware implementation.
 
 const data_cube = rand(Float64, (500, 500, 500))
 const permuted = zeros(Float64, (500, 500, 500))
