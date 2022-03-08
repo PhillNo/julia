@@ -1,10 +1,12 @@
-# The data of a three dimensional vector is addressed in hardware using one dimension.
-# For a 500^3 element cube, the elements in the first row and first column of each page are 250000 addresses apart.
-# Hardware is divided into segments and there is a greater time penalty for accessing addresses on different segments than elements on the same segment.
-# Each axis of the below data cube has the same depth, but the time to sum all of the elements along an axis varies due to this underlying hardware implementation.
+# The data of a three dimensional vector is flattened into one dimension at the hardware level.
+# Thus, for a 500^3 element cube, elements in the first row and first column of each page are 250,000 addresses apart.
+# This is important to consider because there is a greater time penalty to access elements that are further apart in physical memory vs adjacent elements in physical memory. This is due to the architecture of RAM being contiguously addressable but not physically contiguous. The physical memory is broken into chunks and it is faster to make multiple reads on the same chunk.
+# Each axis of the below data cube has the same depth, but the time to sum all elements along an axis greatly varies.
 
-const data_cube = rand(Float64, (500, 500, 500))
-const permuted = zeros(Float64, (500, 500, 500))
+const depth = 500 # greater cube depth will exaggerate timing difference. Permuting a large will take much longer.
+
+const data_cube = rand(Float64, (depth, depth, depth))
+const permuted = zeros(Float64, (depth, depth, depth))
 
 println(typeof(data_cube))
 

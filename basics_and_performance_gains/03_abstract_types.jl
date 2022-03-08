@@ -1,7 +1,7 @@
-# Containers of abstract types are slower
+# Containers of abstract types are slower to iterate over.
 # Real[] can contain Float32, Float64, or other types of rational numbers
-# The variable a is thus implemented as an array of pointers.
-# b is a raw array of Float64. Iteration & access is much faster.
+# The variable "a" is thus implemented as an array of pointers.
+# "b" is a raw array of Float64. Iteration & access is much faster.
 # (This is similar to virtual functions being slower in C++)
 
 a = Real[]

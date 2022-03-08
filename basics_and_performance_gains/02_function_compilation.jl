@@ -10,7 +10,7 @@ println("y is not const. value and type of y can change. typeof(y): ", typeof(y)
 function sum_arg(x)
     s = 0
 
-    #not necessary to enumerate, but this can be convenient in other cases. enumerate a decorator coroutine
+    #not necessary to enumerate, but this can be convenient in other cases. enumerate is like a decorator coroutine
     for (index, val) in enumerate(x)
         s += val
     end
@@ -19,16 +19,16 @@ function sum_arg(x)
 end
 
 println("\nsumming values in y...")
-@time sum_arg(y) # according to docs, @time needs to compile as well, but that is not included in this measurement
+@time sum_arg(y) # according to docs, @time needs to compile as well
 
 println("\nsumming values in y...")
-@time sum_arg(y) # Second call is faster since the function has been compiled. Insignificant compile time in this case
+@time sum_arg(y) # second call is faster since the function has been compiled. Insignificant compile time in this case
 println("Second invocation is faster since the function has been compiled.")
 
 println("\nsumming values in x...")
 @time sum_arg(x) # x is a different data type BUT because the type is fixed this was compiled ahead of runtime
 
-println("\nAssigning to y a new type, Vector{Int64}, and summing values...")
+println("\nAssigning to y a new type that has not been used yet, Vector{Int64}, and summing values...")
 y = rand(Int64, 100000)
 @time sum_arg(y)
 println("Slow again for time to compile/multiple-dispatch.")

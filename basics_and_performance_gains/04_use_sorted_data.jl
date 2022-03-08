@@ -1,8 +1,8 @@
 # Sorting arrays has at least two potential benefits:
 
 # 1. To avoid accumulation of roundoff error it is best to take the summation of a set by adding smallest to largest.
-#    This is because the possible numbers representable by a machine using floating pointgrows apart exponentially.
-#    The spacing between all adjacent integers is 1.
+#    This is because the possible numbers representable by a machine using floating point grows apart exponentially.
+#    The spacing between adjacent integers however is a constant 1.
 
 #Note: It might save time to avoid sorting by using Kahan summation.
 

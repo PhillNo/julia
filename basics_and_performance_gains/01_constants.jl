@@ -1,6 +1,6 @@
 # To fix the data type of a variable in a global scope differs from a local scope.
-#   In local scope, specify the data type at variable declaration.
-#   In global scope, use the const keyword. const and specification of data type is redundant & not implemented anyway.
+# In local scope, specify the data type at variable declaration.
+# In global scope, use the const keyword. const and specification of data type is redundant & not implemented anyway.
 # NOTE: If assigning a value of a different type to x in a nested scope, like a try block, a copy is made and the copy takes precedence in the nested scope.
 
 # ===========================
