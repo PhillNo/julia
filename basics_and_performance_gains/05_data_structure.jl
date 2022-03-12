@@ -21,7 +21,7 @@ resides at.
 The following demonstrates the time to sum elements along a row, column, and layer of a data cube.
 =#
 
-const depth = 500 # greater cube depth will exaggerate timing difference. Permuting a large will take much longer.
+const depth = 500 # greater cube depth will exaggerate timing difference. Permuting a large cube will take much longer.
 
 const data_cube = rand(Float64, (depth, depth, depth))
 const permuted = zeros(Float64, (depth, depth, depth))
