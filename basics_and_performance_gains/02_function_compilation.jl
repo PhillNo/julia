@@ -1,5 +1,9 @@
-# Measuring time for functions to compile
-# Because of multiple dispatch, compilation happens once for each invocation using new arg types.
+#=
+Measuring time for functions to compile
+
+    Because of multiple dispatch, compilation happens once for each 
+invocation using new arg types.
+=#
 
 const  x = rand(Float32, 100000)
 global y = rand(100000) # global is usually used in a nested scope to refer to a var outside

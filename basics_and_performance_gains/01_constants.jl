@@ -1,12 +1,22 @@
-# To fix the data type of a variable in a global scope differs from a local scope.
-# In local scope, specify the data type at variable declaration.
-# In global scope, use the const keyword. const and specification of data type is redundant & not implemented anyway.
-# NOTE: If assigning a value of a different type to x in a nested scope, like a try block, a copy is made and the copy takes precedence in the nested scope.
+#=
+To fix the data type of a variable in a global scope differs from a
+local scope.
+
+In local scope, specify the data type at variable declaration.
+
+In global scope, use the const keyword. const and specification of data
+type is redundant & not implemented anyway.
+
+NOTE: If assigning a value of a different type to x in a nested scope,
+like a try block, a copy is made and the copy takes precedence in the
+nested scope.
+=#
 
 # ===========================
 # const in local scope
 function foo_const()
-    # note the "const" keyword is not used here. "LoadError: syntax: unsupported `const` declaration on local variable"
+    # note the "const" keyword is not used here. 
+    # "LoadError: syntax: unsupported `const` declaration on local variable"
     bar::Int32 = 1
     println(bar, " ", typeof(bar))
     bar = 2
@@ -25,11 +35,13 @@ end
 
 
 # ===========================
-#const in global scope
-const x = rand(100) # note that the data type of x is not specified, but the data type is fixed
+# const in global scope
+# note that the data type of x is not specified, but the data type is fixed
+const x = rand(100)
 println("x: ", typeof(x), "\n")
 
-println("reassigning to x a Vector of Float64...") # assignments made to const IF the assigned value is same data type
+# assignments made to const IF the assigned value is same data type
+println("reassigning to x a Vector of Float64...")
 x = rand(Float64, 100)
 println("x: ", typeof(x))
 println("Successfully assigned new value to x.", "\n")
