@@ -16,7 +16,7 @@ print("sum row: ")
 print("sum col: ")
 @time sum(data_cube[1, :, 1])
 print("sum pag: ")
-@time sum(data_cube[1, 1, :]) # for a larger data cube the relative differences are MUCH greater
+@time sum(data_cube[1, 1, :]) # for a larger data cube the relative differences are more exaggerated
 
 # ===========================
 # Uncomment the below to see how long it takes to rotate the data cube (consider decreasing "depth" so you have enough memory)
