@@ -14,8 +14,8 @@ for i in 1:100000
     push!(b, x)
 end
 
-@timed sum(a) # running once so compilation of sum() does not distort relative times
-@timed sum(b) # running once so compilation of sum() does not distort relative times
+@timed sum(a) # running once so compilation of sum() does not distort relative time differences
+@timed sum(b) # running once so compilation of sum() does not distort relative time differences
 
 print("a: "); @time sum(a)
 print("b: "); @time sum(b)
