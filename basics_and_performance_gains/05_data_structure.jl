@@ -21,10 +21,10 @@ resides at.
 The following demonstrates the time to sum elements along a row, column, and layer of a data cube.
 =#
 
-const depth = 500 # greater cube depth will exaggerate timing difference. Permuting a large cube will take much longer.
+const depth = 1000 # greater cube depth will exaggerate timing difference. Permuting a large cube will take much longer.
 
-const data_cube = rand(Float64, (depth, depth, depth))
-const permuted = zeros(Float64, (depth, depth, depth))
+# TODO: different behavior observed when using Float32 vs Float64
+const data_cube = rand(Float32, (depth, depth, depth))
 
 println(typeof(data_cube))
 
@@ -32,12 +32,12 @@ print("sum row: ")
 @time sum(data_cube[:, 1, 1])
 print("sum col: ")
 @time sum(data_cube[1, :, 1])
-print("sum pag: ")
+print("sum layer: ")
 @time sum(data_cube[1, 1, :]) # for a larger data cube the relative differences are more exaggerated
 
 # ===========================
 # Uncomment the below to see how long it takes to rotate the data cube (consider decreasing "depth" so you have enough memory)
-
+# const permuted = zeros(Float64, (depth, depth, depth))
 # print("time to permute a 500x500x500 data cube: ")
 # @time permutedims!(permuted, data_cube, [3, 2, 1]) #in-place permutation not supported
 # 
