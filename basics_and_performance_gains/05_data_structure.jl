@@ -1,7 +1,8 @@
-# The data of a three dimensional vector is flattened into one dimension at the hardware level.
-# Thus, for a 500^3 element cube, elements in the first row and first column of each page are 250,000 addresses apart.
-# This is important to consider because there is a greater time penalty to access elements that are further apart in physical memory vs adjacent elements in physical memory. This is due to the architecture of RAM being contiguously addressable but not physically contiguous. The physical memory is broken into chunks and it is faster to make multiple reads on the same chunk.
-# Each axis of the below data cube has the same depth, but the time to sum all elements along an axis greatly varies.
+# A 3-densional Vector of with a depth of 500 elements per dimension is addressed at lower levels in the machine with a 1-dimensional hardware address.
+#So, when that cube is flattened into 1-dimensional memory, adjacent elements along the row of a page will have a stride of 1*sizeof(datatype) addresses apart.
+#The stride between adjacent element along the columns will be 500*sizeof(data), and (500^2)*sizeof(data) for adjacent elements along layers.
+#Because of how processors implement "virtual memory", addresses "far away" from each other will exists on different pages in virtual memory. The virtual memory will then have to access those different pages, which means multiple lookups to find the hardware address an element resides in.
+#The following demonstrates the time to sum elements along a row, column, and layer of a data cube.
 
 const depth = 500 # greater cube depth will exaggerate timing difference. Permuting a large will take much longer.
 
